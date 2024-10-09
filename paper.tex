@@ -51,7 +51,7 @@ Our contribution is informed by the authors' extensive experience with IoT and c
 
 \textbf{LwM2M and IETF}
 
-The IETF has played a fundamental role in shaping the protocols that underpin Lightweight Machine-to-Machine (LwM2M). IETF efforts have focused on adapting existing Internet and Web protocols to meet the needs of resource-constrained IoT devices ~\cite{9139045}.
+The IETF has played a fundamental role in shaping the protocols that underpin LwM2M. IETF efforts have focused on adapting existing Internet and Web protocols to meet the needs of resource-constrained IoT devices ~\cite{9139045}.
 
 LwM2M is built upon several key IETF standards. At the core is the \textit{Constrained Application Protocol (CoAP)}~\cite{rfc7252}, a lightweight RESTful protocol designed for constrained environments, providing the fundamental request/response model for LwM2M communications. \textit{RFC 7959}~\cite{rfc7959} defines block-wise transfers in CoAP, allowing LwM2M to efficiently handle large payloads by breaking them into smaller blocks. The \textit{LwM2M} protocol also leverages \textit{RFC 7641}~\cite{rfc7641} for resource observation, enabling clients to subscribe to changes of resource state without continuous polling. For secure communications, LwM2M often relies on the \textit{Datagram Transport Layer Security (DTLS)} as outlined in \textit{RFC 6347}~\cite{rfc6347}, ensuring encryption and integrity over the CoAP protocol. An additional layer of security is provided by \textit{Object Security for Constrained RESTful Environments (OSCORE)}~\cite{rfc8613}, which offers end-to-end encryption and integrity protection directly at the application layer, making it suitable for scenarios where DTLS is not applicable. Additionally, the \textit{Constrained RESTful Environments (CoRE) Resource Directory (RD)}~\cite{rfc9176} facilitates resource registration of IoT endpoints by maintaining information about resources on other servers, the lookup interface, although present is not intended for applications but for management purposes.
 \sloppy
@@ -111,37 +111,24 @@ LwM2M defines four primary communication interfaces that facilitate interactions
   \item \textbf{Information Reporting Interface}: This interface enables the client to report changes in its status or resource values to the server, using the Observe function. The server can set up observation requests, prompting the client to notify it when certain resource values change or when predefined conditions are met. This capability is particularly useful for monitoring dynamic IoT environments where timely updates are crucial. LwM2M defines specific attributes to configure how frequently these notifications occur.
 \end{itemize}
 
-LwM2M has been integrated on most IoT OSs like Mbed~\cite{mbed}, RIOT OS~\cite{riot_os}, Contiki-NG~\cite{contiki_ng}, and others, with a strong focus on IoT device security~\cite{pop00010}.
+LwM2M has been integrated on most IoT OSs like Mbed~\cite{mbed}, RIOT OS~\cite{riot_os}, Contiki-NG~\cite{contiki_ng}, and many others, with a strong focus on IoT device security~\cite{pop00010}.
 
-\section{LwM2M Extensions} \label{extensions}
+\section{LwM2M Evolution} \label{extensions}
 
 LwM2M, though robust in its core functionalities, has advanced significantly through various extensions and integrations. This section explores recent research developments that may inspire its future evolution.
-
-\subsection{LwM2M Integrations}
-
-
 %Jaime: Expand on the implications of these integrations for the future of IoT and network management.
-The integration of LwM2M with other technologies has been researched, aiming to enhance the capabilities and interoperability of IoT systems. 
 
-To name a few, Kim et al.~\cite{pop00007} designed and implemented a blockchain-based system that enables interworking between oneM2M and LwM2M IoT systems. This approach not only improves interoperability between different IoT frameworks but also enhances security by leveraging blockchain's immutable and distributed ledger properties. 
+LwM2M has become a central focus in IoT research due to its improved security, in particular for firmware updates ~\cite{8725488} and integration with other technologies. 
 
-In the context of Industrial IoT (IIoT), Yaker et al.~\cite{pop00004} introduced a novel edge Security Information and Event Management (SIEM) system for managing IoT flows within 5G private networks. Their approach incorporates LwM2M data events, demonstrating how edge computing can effectively manage and secure IoT data in a 5G environment. Similarly, Myoung et al.~\cite{pop00012} addressed the integration of LwM2M with smart metering technologies, proposing a data interworking model between the Device Language Message Specification (DLMS)~\cite{dlms-spec} nd LwM2M protocols. Their work highlights the potential for harmonizing different IoT protocols within Advanced Metering Infrastructure (AMI) systems, thereby enabling more efficient data exchange and management.
+Several studies have concentrated on enhancing IoT security through the use of LwM2M. For instance, Muhammad et al.~\cite{pop00001} investigated the use of ARIA cryptography within Hardware Secure Modules for both LwM2M and MQTT protocols, aiming to bolster the security of next-generation IoT systems. Similarly, Lanzieri et al.~\cite{pop00011} proposed extensions to the LwM2M core specification to facilitate secure and authorized client-to-client communication, thereby addressing a significant limitation of the current standard.
 
-Further efforts have been made to integrate LwM2M with industrial communication protocols. Karaagac et al.~\cite{pop00013} explored the interoperability between LwM2M and OPC UA (Open Platform Communications Unified Architecture), proposing a framework where OPC UA Servers can be virtualized as LwM2M Clients and vice versa. This approach aims to bridge the gap between IoT and industrial automation, facilitating seamless communication across heterogeneous systems. Similarly, Cavalcanti et al.~\cite{pop00014} reviewed various machine-to-machine communication protocols within the context of Industry 4.0, emphasizing the advantages of integrating OPC UA with LwM2M for industrial applications.
+Others have focused on interoperability between SDOs, Kim et al.~\cite{pop00007} have designed and implemented a blockchain-based system that enables interworking between oneM2M~\cite{oneM2M-spec} and LwM2M IoT systems. This approach not only improves interoperability between different IoT frameworks but also enhances security by leveraging blockchain's immutable and distributed ledger properties.
 
-A last example, Wang et al.~\cite{pop00015} proposed a CoAP-based OPC UA transmission scheme tailored for resource-constrained devices. Although their work does not directly involve LwM2M, it illustrates the broader trend of adapting industrial communication protocols to fit the needs of IoT environments. Such efforts are indicative of a growing interest in enabling resource-efficient and interoperable solutions in the IoT landscape, especially where industrial and IoT domains converge.
+In the context of Industrial IoT (IIoT), Yaker et al.~\cite{pop00004} introduced a novel edge Security Information and Event Management (SIEM) system for managing IoT flows within 5G private networks. Their approach incorporates LwM2M data events, demonstrating how edge computing can effectively manage and secure IoT data in a 5G environment. Similarly, Myoung et al.~\cite{pop00012} addressed the integration of LwM2M with smart metering technologies, proposing a data interworking model between the Device Language Message Specification (DLMS)~\cite{dlms-spec} used for managing smart meters and the LwM2M protocol. This highlights the potential for harmonizing different IoT protocols within metering infrastructure systems.
 
-The integration of LwM2M with these diverse technologies underscores its versatility and adaptability, positioning it as a critical component in the evolving IoT ecosystem.
+Further efforts have been made to integrate LwM2M with industrial communication protocols. Karaagac et al.~\cite{pop00013} explored the interoperability between LwM2M and the Open Platform Communications Unified Architecture (OPC UA), proposing a framework where OPC UA Servers can be virtualized as LwM2M Clients and vice versa. This approach aims to bridge the gap between IoT and industrial automation, facilitating seamless communication across heterogeneous systems. Similarly, Cavalcanti et al.~\cite{pop00014} reviewed various machine-to-machine communication protocols within the context of Industry 4.0, emphasizing the advantages of integrating OPC UA with LwM2M for industrial applications.
 
-\subsection{ Adoption of LwM2M in IoT Security}
-
-The Lightweight Machine-to-Machine (LwM2M) protocol has emerged as a critical focus in recent IoT research, particularly concerning security improvements, implementation strategies, and integration with other technologies. This increased attention highlights its growing importance in advancing IoT systems.
-
-Several studies have concentrated on enhancing IoT security through the use of LwM2M. For instance, Muhammad et al.~\cite{pop00001} investigated the use of ARIA cryptography within Hardware Secure Modules for both LwM2M and MQTT protocols, aiming to bolster the security of next-generation IoT systems. Similarly, Lanzieri et al.~\cite{pop00011} proposed extensions to the LwM2M core specification to facilitate secure and authorized client-to-client communication, thereby addressing a significant limitation of the standard protocol.
-
-However, despite its promising capabilities, LwM2M still faces challenges in widespread adoption. Szydlo and Nagy~\cite{pop00003} pointed out the low market uptake of LwM2M in IoT products, attributing this to a lack of freely available developer tools. This observation underscores the need for more accessible resources to facilitate LwM2M implementation.
-
-In parallel, Saif and Matrawy~\cite{pop00005} proposed and evaluated methods for the mass configuration of heterogeneous IIoT nodes using LwM2M, demonstrating potential solutions for scaling the protocol in diverse environments.
+A last example, Wang et al.~\cite{pop00015} proposed a CoAP-based OPC UA transmission scheme tailored for resource-constrained devices. Although their work does not directly involve LwM2M, it illustrates the broader trend of adapting industrial communication protocols to fit the needs of IoT environments and the reuse of IETF protocols in wider contexts that originally intended. This could also indicate the interest in enabling resource-efficient and interoperable solutions in the IoT landscape, where industrial and IoT domains converge.
 
 \section{LwM2M Operations} \label{operations}
 %Jaime: Develop this section to cover typical operations, challenges, and best practices. Include examples of common operations and how they're implemented.
@@ -158,7 +145,7 @@ TBD
 
 \section{Acknowledgments}
 
-We'd like to thank Ericsson for their support of this work. We also appreciate A, B, C for their valuable discussions on this topic.
+We'd like to thank XYZ for their support of this work. We also appreciate A, B, C for their valuable discussions on this topic.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{paper}
