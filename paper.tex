@@ -19,22 +19,14 @@
   \city{Jorvas}
   \country{Finland}
 }
-\author{Matthew Gillmore}
-\email{email@email}
-\orcid{orcidID}
-\affiliation{%
-  \institution{Itron}
-  \city{City}
-  \country{Country}
-}
 
 \begin{abstract}
-%Jaime: Write a concise abstract (150-250 words) summarizing the paper's purpose, methods, key findings, and implications.
-TBD.
+
+This paper provides an overview of the Lightweight Machine-to-Machine (LwM2M) protocol, highlighting its role in IoT device management and its integration with key IETF standards such as CoAP, DTLS, and OSCORE. While network management protocols like SNMP, RESTCONF, and CORECONF focus on monitoring and configuring endpoints within the network, LwM2M extends these capabilities by managing the entire lifecycle of individual devices, including configuration, control, and maintenance. We discuss LwM2M's architecture, data model, communication interfaces, and explore recent advancements in the protocol.
 
 \end{abstract}
 
-\keywords{IoT, network management, LwM2M, device management, protocol, scalability, security}
+\keywords{Internet of Things, IoT, network management, device management, security, standards}
 
 \maketitle
 
@@ -45,7 +37,7 @@ TBD.
 
 The rapid evolution of network management protocols necessitates a reevaluation of existing technologies and their applicability to modern challenges. The Lightweight Machine-to-Machine (LwM2M) protocol~\cite{lwm2m-spec}, developed by the Open Mobile Alliance (OMA), is a key player in this domain, offering a standardized framework for managing Internet of Things (IoT) devices~\cite{oma-sdo}. This paper explores the role of LwM2M in the context of the IAB workshop on the Next Era of Network Management Operations, focusing on its current deployments, challenges, and future potential.
 
-The IAB "NEMOPS" workshop seeks contributions that critically assess the progress made since the 2002 IAB workshop, particularly in terms of network management protocols. This paper aims to present LwM2M's as a new protocol created in 2017 that addresses the needs for managing IoT endpoints from the operational point of view of device and network management.
+The IAB "NEMOPS" workshop seeks contributions that critically assess the progress made since the 2002 IAB workshop, particularly in terms of network management protocols. This paper aims to present LwM2M, an management protocol that addresses the needs for managing IoT endpoints from the operational point of view of device and network management.
 
 Our contribution is informed by the authors' extensive experience with IoT and contributions in the IoT domain both at IETF and in OMA. The rest of the document is organized as follows: The \hyperref[introduction]{Introduction} outlines LwM2M as a standardized framework for managing IoT devices, addressing current network management challenges. The \hyperref[overview]{LwM2M Protocol Overview} details its architecture, focusing on communication between Clients, Servers, and Bootstrap Servers (see Figure~\ref{fig:overall_architecture}). Recent advancements, including integrations with blockchain and industrial protocols, are discussed in \hyperref[extensions]{LwM2M Extensions}, highlighting its adaptability. Remaining adoption challenges are explored in \hyperref[operations]{LwM2M Operations}, while the \hyperref[conclusions]{Conclusions} summarize key findings and future directions.
 
@@ -87,7 +79,7 @@ The LwM2M protocol employs a structured, object-based data model to facilitate c
 
 Each object consists of multiple resources, which serve as the fundamental data points within the object. Resources are assigned integer IDs and are classified as either mandatory or optional, depending on the object's intended function being the mandatory ones used for interoperability purposes. An object can also have multiple instances, each with a unique instance ID, allowing for flexibility. For instance, a device with several sensors can represent each sensor as an instance of the same object, such as in a network of connected lightbulbs.
 
-The LwM2M data model enables servers to access individual resources, instances, or entire objects using well-defined URI strings. The format of these URIs is as follows:
+The LwM2M data model enables servers to access individual resources, instances, or entire objects using well-defined URI strings. The URI template approach follows the Web Linking and the IETF CoRE Link Format~\cite{rfc6690}. The format is as follows:
 
 \[
 /<Object ID>/<Instance ID>/<Resource ID>
@@ -95,7 +87,9 @@ The LwM2M data model enables servers to access individual resources, instances, 
 
 In this structure, the instance or resource ID can be omitted if the request targets the entire object or a specific instance. This model provides a straightforward way to interact with data at different levels of granularity.
 
-All objects are listed in the LwM2M Registry~\cite{lwm2m-registry}, categorized as either application-oriented (e.g., thermostats, lamps) or system-oriented (e.g., security, connectivity).
+All objects are listed in the LwM2M Registry~\cite{lwm2m-registry}, categorized as either application-oriented (e.g., thermostats, lamps) or system-oriented (e.g., security, connectivity). Those for applications follow the same schema and come from the IP for Smart Objects (IPSO)~\cite{ipso} consortium which was integrated into OMA. 
+
+Semantically, the object type represents a single measurement, actuation, or control point for example a temperature sensor, a light (actuator), or an on-off switch (control point). A resource specifies a particular view or active property of an object. For example, a temperature sensor object might expose the current value (most recent reading), also the minimum and maximum possible reading, the minimum and maximum reading in an interval, and attributes like engineering units and application type. Attributes describe the metadata configuration, settings, and state of an object or resource, and are discoverable by reading the link-format data of an object or resource. Multiple attributes may be serialized in the link-format descriptors that an object exposes.
 
 \textbf{Communication Interfaces}
 
@@ -115,10 +109,7 @@ LwM2M has been integrated on most IoT OSs like Mbed~\cite{mbed}, RIOT OS~\cite{r
 
 \section{LwM2M Evolution} \label{extensions}
 
-LwM2M, though robust in its core functionalities, has advanced significantly through various extensions and integrations. This section explores recent research developments that may inspire its future evolution.
-%Jaime: Expand on the implications of these integrations for the future of IoT and network management.
-
-LwM2M has become a central focus in IoT research due to its improved security, in particular for firmware updates ~\cite{8725488} and integration with other technologies. 
+LwM2M, though robust in its core functionalities, has advanced significantly through various extensions and integrations. This section explores recent research developments that may inspire its future evolution. LwM2M has become a central focus in IoT research due to its improved security, in particular for firmware updates ~\cite{8725488} and integration with other technologies. 
 
 Several studies have concentrated on enhancing IoT security through the use of LwM2M. For instance, Muhammad et al.~\cite{pop00001} investigated the use of ARIA cryptography within Hardware Secure Modules for both LwM2M and MQTT protocols, aiming to bolster the security of next-generation IoT systems. Similarly, Lanzieri et al.~\cite{pop00011} proposed extensions to the LwM2M core specification to facilitate secure and authorized client-to-client communication, thereby addressing a significant limitation of the current standard.
 
@@ -130,22 +121,13 @@ Further efforts have been made to integrate LwM2M with industrial communication 
 
 A last example, Wang et al.~\cite{pop00015} proposed a CoAP-based OPC UA transmission scheme tailored for resource-constrained devices. Although their work does not directly involve LwM2M, it illustrates the broader trend of adapting industrial communication protocols to fit the needs of IoT environments and the reuse of IETF protocols in wider contexts that originally intended. This could also indicate the interest in enabling resource-efficient and interoperable solutions in the IoT landscape, where industrial and IoT domains converge.
 
-\section{LwM2M Operations} \label{operations}
-%Jaime: Develop this section to cover typical operations, challenges, and best practices. Include examples of common operations and how they're implemented.
-%Jaime: Add more specific examples of how LwM2M is used in real-world applications.
-
-
-
-TBD
-
-
 \section{Conclusions} \label{conclusions}
 
-TBD
+In this paper, we have presented an overview of LwM2M and its components, the dependencies on IETF standards and some potential new building blocks for future additions. 
 
 \section{Acknowledgments}
 
-We'd like to thank XYZ for their support of this work. We also appreciate A, B, C for their valuable discussions on this topic.
+We'd like to thank Ericsson for their support of this work.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{paper}
