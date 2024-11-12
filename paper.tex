@@ -117,15 +117,17 @@ In the context of Industrial IoT (IIoT), Yaker et al.~\cite{pop00004} introduced
 
 Further efforts have been made to integrate LwM2M with industrial communication protocols. Karaagac et al.~\cite{pop00013} explored the interoperability between LwM2M and the Open Platform Communications Unified Architecture (OPC UA), proposing a framework where OPC UA Servers can be virtualized as LwM2M Clients and vice versa. Similarly, Cavalcanti et al.~\cite{pop00014} reviewed various machine-to-machine communication protocols within the context of Industry 4.0. A third example is based only on CoAP, Wang et al.~\cite{pop00015}, which proposed a CoAP-based OPC UA transmission scheme tailored for resource-constrained devices. These three papers aim to bridge the gap between IoT and industrial automation.
 
+The evolution of LwM2M has also prompted considerations for enhancing its data model capabilities. While the current IPSO data model, utilizing the format \textit{/<ObjectID>/<InstanceID>/<ResourceID>}, is well-suited for constrained environments, it may fall short in addressing the needs of complex machines or network nodes with large, deeply nested configuration structures. This limitation suggests the potential for developing alternative data models that can accommodate more intricate configurations, thereby extending the LwM2M protocol's applicability to a broader range of devices.
+
+The interoperability of LwM2M with hyperscalers is hindered by the lack of native CoAP support within these platforms. This limitation poses a challenge for vendors seeking to integrate LwM2M-based IoT solutions with HCS services. To overcome this obstacle, some vendors have devised methods to encapsulate CoAP messages within MQTT topics, although this solution is merely a workaround that may not fully address the efficiency needs of large-scale IoT deployments.
 
 \section{Conclusions} \label{conclusions}
 
 This paper provides an overview of the LwM2M protocol, detailing its core components, architecture, and integration with IETF standards. We explored its role in managing IoT devices, including its communication interfaces and data model, and discussed its adaptability through recent extensions. LwM2M continues to evolve as a key solution for IoT device management, offering scalability, security, and efficient operation, especially in constrained environments like Cellular IoT (CIoT). Future developments in interoperability and security enhancements will further strengthen its utility across diverse IoT applications.
 
-
 \section{Acknowledgments}
 
-We would like to thank Ericsson for their support of this work. Special thanks to Jari Arkko and Carsten Bormann for their valuable review and feedback, which improved the quality of this paper.
+We would like to thank Ericsson for their support of this work. Special thanks to Jari Arkko, Carsten Bormann and Sándor Katona for their valuable review and feedback, which improved the quality of this paper.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{paper}
